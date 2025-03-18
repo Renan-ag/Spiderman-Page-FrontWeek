@@ -1,121 +1,214 @@
-header{
-    width: 100%;
-    padding-top: 16px;
+// Header styles
+header {
+  width: 100%;
+  padding-top: 32px;
 }
 
-.navbar{
-    max-width: 1440px;
-    margin: 0 auto;
+// Navbar styles
+.navbar {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-    padding: 0 16px;
-    
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  &>* {
+    z-index: 999;
+  }
 }
 
-.nav-menu{
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
+// Nav menu styles
+.nav-menu {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
-.nav-list{
-    list-style: none;
-    display: flex;
-    
-    li{
-        margin-left: 24px;
+// Nav list styles
+.nav-list {
+  list-style: none;
+  display: flex;
+
+  li {
+    margin-left: 24px;
+  }
+
+  @include responsive() {
+    display: none;
+  }
+}
+
+// Brand styles
+.brand {
+  max-width: 72px;
+}
+
+// Nav link styles
+.nav-link {
+  display: inline-block;
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 200;
+  color: $gray-1;
+  padding: 8px 16px;
+  transition: .7s ease;
+  position: relative;
+
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    width: 2px;
+    height: 0;
+    transition: .7s ease;
+    background: linear-gradient(180deg, rgba(234, 29, 34, 0) 0%, #EA1D22 100%);
+  }
+
+  &:hover {
+    color: $white-light;
+
+    &::after {
+      height: 46px;
+    }
+  }
+}
+
+// Hamburger menu (bx) styles
+.bx {
+  background-color: transparent;
+  border: 0;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  position: relative;
+  display: none;
+
+  @include responsive() {
+    display: block;
+  }
+
+  &::after {
+    content: '';
+    width: 70%;
+    height: 2px;
+    display: block;
+    position: absolute;
+    top: 35%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+    transition: .45s ease;
+    border-radius: 2px;
+    background-color: $white-dark;
+  }
+
+  &::before {
+    content: '';
+    width: 70%;
+    height: 2px;
+    display: block;
+    position: absolute;
+    top: 65%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    transition: .45s ease;
+    border-radius: 2px;
+    background-color: $white-dark;
+  }
+
+  &.active {
+    &::after {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(135deg);
     }
 
-    @include responsive(){
-        display: none;
+    &::before {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-315deg);
     }
-
+  }
 }
 
-.logo{
-    max-width: 88px;
-}
+// Social icons styles
+.nav-social {
+  display: flex;
+  align-items: center;
 
-.nav-link{
-    display: inline-block;
-      
-    font-size: 16px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    font-weight: 200;
-
-    color: $gray-2;
-
-    padding: 8px 16px;
+  svg {
+    cursor: pointer;
+    margin-left: 16px;
+    width: 24px;
     transition: .7s ease;
 
-    position: relative;
-
-    &::after{
-        content:'';
-        display: block;
-        position: absolute;
-        top: -40px;
-        left: 50%; 
-
-        width: 2px;
-        height: 0;
-        transition: .7s ease;
-
-        background: linear-gradient(180deg,rgba(234, 29, 34, 0) 0%, #EA1D22 100%);
-        
+    path,
+    circle {
+      transition: .7s ease;
     }
 
-    &:hover{
-        color: $white-light;
-    
-        &::after{
-            height: 46px;
-        }
-    } 
-}
+    &:hover {
+      path,
+      circle {
+        fill: $red-light;
+      }
+      transform: translateY(-3px);
+    }
+  }
 
-.bx{
+  @include responsive() {
     display: none;
-
-    @include responsive(){
-        display: block;
-        width: 48px;
-        height: 48px;
-    
-        background-color: $white;
-    
-        border-radius: 8px;    
-    }
-
+  }
 }
 
-.nav-social{
-    display: flex;
+// Mobile menu styles
+.menu-mobile {
+  opacity: 0;
+  pointer-events: none;
+  transition: .5s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 900;
+  background-color: #0a0c1093;
+  backdrop-filter: blur(6px);
 
-    svg{
-        cursor: pointer;
+  .nav-list-mobile {
+    list-style: none;
 
-        margin-left: 16px;
-        width: 24px;
-
-        transition: .7s ease;
-        path, circle{
-            transition: .7s ease;
-        }
-
-        &:hover{
-            path, circle{
-                fill: $red-light;
-            }
-            transform: translateY(-3px);
-        }
+    .nav-link-mobile {
+      display: inline-block;
+      width: 100%;
+      color: $white-dark;
+      font-size: 40px;
+      text-align: center;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 4px;
     }
+  }
 
-    @include responsive(){
-        display: none;
-    }
+  &.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+}
 
+// Responsive overrides
+@include responsive() {
+  .nav-social {
+    display: none;
+  }
+
+  .menu-mobile {
+    display: none;
+  }
 }
