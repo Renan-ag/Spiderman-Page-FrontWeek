@@ -172,7 +172,7 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -205,10 +205,6 @@ header {
 // Responsive overrides
 @include responsive() {
   .nav-social {
-    display: none;
-  }
-
-  .menu-mobile {
     display: none;
   }
 }
